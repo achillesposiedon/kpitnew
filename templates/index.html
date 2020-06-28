@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>KPIT Brakepad End Temperature Prediction</h1>
+    <p class="lead">Brake Pad End Temperature prediction after an intense driving session can be helpful in determining the rmaining utility life of a brake pad.</p>
+    <p><a href="{{ url_for('diff') }}" class="btn btn-primary btn-large">Predict Temperature Difference instead.</a></p>
+</div>
+<body>
+    <div class="login">
+        <h1>Predict End Temperature</h1>
+
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('prediction')}}" method="post">
+            <input type="text" name="Start Temperature" placeholder="Start Temperature" required="required" />
+            <input type="text" name="Time Difference" placeholder="Time Difference" required="required" />
+            <input type="text" name="Altitude Difference" placeholder="Temperature Difference" required="required" />
+            <br />
+            <br />
+            <select name=algos method="post" action="/">
+                {% for algo in algos %}
+                <option value="{{algo}}" SELECTED>{{algo}}</option>"
+                {% endfor %}
+            </select>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+        <h2>{{p}}</h2>
+        <h2>{{prediction_text}}</h2>
+
+
+
+    </div>
+    </body>
+    {% endblock %}
